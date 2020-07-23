@@ -74,7 +74,7 @@ the driver should be loaded in your kernel by default. If it is not, it is typic
 On macOS, you will still need to [install it](http://www.prolific.com.tw/US/ShowProduct.aspx?p_id=229&pcid=41) (and reboot).
 When you plug in the device, it should show up as `Prolific Technology, Inc. PL2303 Serial Port` when you type `lsusb`.
 
-Using dupont / jumper cables, connect the `TX`/`TXD` pin of the USB connector to the `PE8` pin (Pin 12 on the expansion header).
+Using dupont / jumper cables, connect the `RX`/`RXD` pin of the USB connector to the `PE8` pin (Pin 12 on the expansion header).
 Depending on your setup, you may also want to connect the `GND` pin .
 
 For the full pin-outs of the Giant Gecko's see Section 4 in the [User Guide](https://www.silabs.com/documents/public/user-guides/ug287-stk3701.pdf).
