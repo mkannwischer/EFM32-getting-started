@@ -85,7 +85,8 @@ int randombytes(uint8_t *buf, size_t len)
 
     while (len > 4)
     {
-        while(!TRNG0->FIFOLEVEL);
+        while (!TRNG0->FIFOLEVEL)
+            ;
         random.asint = TRNG0->FIFO;
         *buf++ = random.aschar[0];
         *buf++ = random.aschar[1];
@@ -95,7 +96,8 @@ int randombytes(uint8_t *buf, size_t len)
     }
     if (len > 0)
     {
-        while(!TRNG0->FIFOLEVEL);
+        while (!TRNG0->FIFOLEVEL)
+            ;
         random.asint = TRNG0->FIFO;
         for (; len > 0; len--)
         {
@@ -105,20 +107,22 @@ int randombytes(uint8_t *buf, size_t len)
     return 0;
 }
 
-static void clock_setup(const enum clock_mode clock){
+static void clock_setup(const enum clock_mode clock)
+{
     // Chip errata
     CHIP_Init();
 
     // Set frequency
-    switch(clock){
-        case CLOCK_FAST:
-            // Maximum frequency for EFM32GG11
-            CMU_HFRCOFreqSet(cmuHFRCOFreq_72M0Hz);
-            break;
-        case CLOCK_BENCHMARK:
-            // Maximum frequency such that there are no wait states
-            CMU_HFRCOFreqSet(cmuHFRCOFreq_16M0Hz);
-            break;
+    switch (clock)
+    {
+    case CLOCK_FAST:
+        // Maximum frequency for EFM32GG11
+        CMU_HFRCOFreqSet(cmuHFRCOFreq_72M0Hz);
+        break;
+    case CLOCK_BENCHMARK:
+        // Maximum frequency such that there are no wait states
+        CMU_HFRCOFreqSet(cmuHFRCOFreq_16M0Hz);
+        break;
     }
 }
 
