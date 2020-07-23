@@ -7,7 +7,7 @@ It has
 - 2 MiB Flash
 - runs at at most 72 MHz
 
-By the way, it also has hardware accelerated crypto for AES128/AES256/SHA1/SHA2 and some ECC. 
+By the way, it also has hardware accelerated AES128/AES256/SHA1/SHA2 and some ECC. 
 
 To receive serial output you will also need a USB-TTL converter together with a 2-pin dupont / jumper cable.
 
