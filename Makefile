@@ -30,13 +30,17 @@ LDSCRIPT = efm32-base/device/EFM32GG11B/Source/GCC/efm32gg11b.ld
 LDFLAGS  =  $(ARCH_FLAGS) -fno-builtin -ffunction-sections -fdata-sections \
            -fomit-frame-pointer -T$(LDSCRIPT) -lgcc -lc -lnosys
 
-SRCS = main.c hal-efm32gg.c
+SRCS = hal-efm32gg.c hal-efm32gg-aes.c
 OBJS = $(addprefix build/,$(SRCS:.c=.o))
 
-all: efm32-test.bin
+all: efm32-test.bin efm32-aes.bin
 
-efm32-test.elf: $(LIBEFM32GG11B) $(EMLIB) $(OBJS)
-	$(LD) -o $@ $(OBJS)  $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
+efm32-test.elf: $(LIBEFM32GG11B) $(EMLIB) $(OBJS) main.o
+	$(LD) -o $@ $(OBJS) main.o $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
+
+efm32-aes.elf: $(LIBEFM32GG11B) $(EMLIB) $(OBJS) aes.o
+	$(LD) -o $@ $(OBJS) aes.o $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
+
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
@@ -60,4 +64,6 @@ clean:
 	rm -rf build
 	rm -rf *.elf
 	rm -rf *.bin
+	rm -rf *.o
+	rm -rf *.d
 

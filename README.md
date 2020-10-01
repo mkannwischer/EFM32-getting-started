@@ -7,8 +7,6 @@ It has
 - 2 MiB Flash
 - runs at at most 72 MHz
 
-By the way, it also has hardware accelerated AES128/AES256/SHA1/SHA2 and some ECC. 
-
 To receive serial output you will also need a USB-TTL converter together with a 2-pin dupont / jumper cable.
 
 # Contents
@@ -37,6 +35,7 @@ This example shows how
 - you can obtain cycle counts using SysTick (alternatively, you can also use the CYCCNT if you need to count less than 2^32 cycles).
 - you can get randombytes from the hardware random number generator.
 - you can downclock the core to 16 MHz (maximum frequency is 72 MHz), so that there are no wait states when fetching instructions and data from flash. This allows to get cycle counts that are very close to the ones on other Cortex-M4 cores without wait states (e.g., the pqm4 target STM32F407 at 24 MHz).
+- you can use the AES128 and AES256 hardware acceleration.
 
 # Setup
 As usual you will need the [arm-none-eabi toolchain](https://launchpad.net/gcc-arm-embedded) toolchain installed.

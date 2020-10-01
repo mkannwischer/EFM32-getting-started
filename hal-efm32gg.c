@@ -17,6 +17,7 @@ static void usart_setup(void)
     // Enable oscillator to GPIO and USART1 modules
     CMU_ClockEnable(cmuClock_GPIO, true);
     CMU_ClockEnable(cmuClock_USART5, true);
+    CMU_ClockEnable(cmuClock_CRYPTO0, true);
 
     // set pin modes for UART TX; we don't need to RX
     //GPIO_PinModeSet(gpioPortE, 9, gpioModeInput, 0);
