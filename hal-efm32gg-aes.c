@@ -191,6 +191,7 @@ static void aesX_ctr(uint8_t *out, size_t outlen, const uint8_t *iv)
     size_t len = outlen;
     len /= CRYPTO_AES_BLOCKSIZE;
     CRYPTO0->SEQCTRL = 16UL << _CRYPTO_SEQCTRL_LENGTHA_SHIFT;
+    CRYPTO0->CTRL |= CRYPTO_CTRL_INCWIDTH_INCWIDTH4;
 
 
     if((uintptr_t)iv & 0x3){
