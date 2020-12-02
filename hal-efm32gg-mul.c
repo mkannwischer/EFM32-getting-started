@@ -2,7 +2,7 @@
 #include "hal-mul.h"
 #include "em_crypto.h"
 
-void hal_mul128(uint32_t r[8], uint32_t a[4], uint32_t b[4]){
+void hal_mul128(uint32_t r[8], const uint32_t a[4], const uint32_t b[4]){
     CRYPTO0->WAC = CRYPTO_WAC_MULWIDTH_MUL128 | CRYPTO_WAC_RESULTWIDTH_256BIT;
 
     // select DDATA3 as second operand (V1) of multiplication
