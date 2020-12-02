@@ -30,19 +30,13 @@ LDSCRIPT = efm32-base/device/EFM32GG11B/Source/GCC/efm32gg11b.ld
 LDFLAGS  =  $(ARCH_FLAGS) -fno-builtin -ffunction-sections -fdata-sections \
            -fomit-frame-pointer -T$(LDSCRIPT) -lgcc -lc -lnosys
 
-SRCS = hal-efm32gg.c hal-efm32gg-aes.c hal-efm32gg-sha2.c
+SRCS = hal-efm32gg.c hal-efm32gg-aes.c hal-efm32gg-sha2.c hal-efm32gg-mul.c
 OBJS = $(addprefix build/,$(SRCS:.c=.o))
 
-all: efm32-test.bin efm32-aes.bin efm32-sha2.bin
+all: efm32-test.bin efm32-aes.bin efm32-sha2.bin efm32-mul.bin
 
-efm32-test.elf: $(LIBEFM32GG11B) $(EMLIB) $(OBJS) main.o
-	$(LD) -o $@ $(OBJS) main.o $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
-
-efm32-aes.elf: $(LIBEFM32GG11B) $(EMLIB) $(OBJS) aes.o
-	$(LD) -o $@ $(OBJS) aes.o $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
-
-efm32-sha2.elf: $(LIBEFM32GG11B) $(EMLIB) $(OBJS) sha2.o
-	$(LD) -o $@ $(OBJS) sha2.o $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
+efm32-%.elf: %.o $(LIBEFM32GG11B) $(EMLIB) $(OBJS)
+	$(LD) -o $@ $(OBJS) $< $(LIBEFM32GG11B) $(EMLIB) $(LDFLAGS)
 
 
 %.bin: %.elf

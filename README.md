@@ -36,6 +36,7 @@ This example shows how
 - you can get randombytes from the hardware random number generator.
 - you can downclock the core to 16 MHz (maximum frequency is 72 MHz), so that there are no wait states when fetching instructions and data from flash. This allows to get cycle counts that are very close to the ones on other Cortex-M4 cores without wait states (e.g., the pqm4 target STM32F407 at 24 MHz).
 - you can use the AES128, AES256, and SHA256 hardware acceleration.
+- you can use the hardware accelerator for 128x128-bit and 256x256-bit multiplication.
 
 # Setup
 As usual you will need the [arm-none-eabi toolchain](https://launchpad.net/gcc-arm-embedded) toolchain installed.
