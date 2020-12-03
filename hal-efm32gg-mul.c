@@ -28,9 +28,6 @@ void hal_mul256(uint32_t r[16], const uint32_t a[8], const uint32_t b[8]){
     // select DDATA3 as second operand (V1) of multiplication
     CRYPTO0->CMD = CRYPTO_CMD_INSTR_SELDDATA1DDATA3;
 
-    CRYPTO_SEQ_LOAD_1(CRYPTO0,
-                     CRYPTO_CMD_INSTR_LMUL);
-
     // Load 256-bit a into DDATA1
     CRYPTO_DDataWrite(&CRYPTO0->DDATA1, a);
 
@@ -38,7 +35,7 @@ void hal_mul256(uint32_t r[16], const uint32_t a[8], const uint32_t b[8]){
     CRYPTO_DDataWrite(&CRYPTO0->DDATA3, b);
 
     // Execute
-    CRYPTO_InstructionSequenceExecute(CRYPTO0);
+    CRYPTO0->CMD = CRYPTO_CMD_INSTR_LMUL;
 
     // Retrieve 512-bit result
     CRYPTO_QDataRead(&CRYPTO0->QDATA0, r);
